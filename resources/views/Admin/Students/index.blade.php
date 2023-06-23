@@ -176,9 +176,9 @@
                             <span class="badge badge-secondary"><span style="font-weight: 300; color: #bfbfbf;">List of
                                     students</span>
                         </h5>
-                            {{-- <a href="{{ route('create_student') }}">
+                            <a href="{{ route('create_student') }}">
                               <button type="button" style="width:100%" class="btn btn-outline-danger float-right">+ Add Student</button>
-                            </a> --}}
+                            </a>
                     </div>
                     <div class="header-line"></div>
                 </div>

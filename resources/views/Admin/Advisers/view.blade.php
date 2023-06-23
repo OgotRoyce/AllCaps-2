@@ -173,14 +173,16 @@
         background: #fff;
         border-radius: 18px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         position: relative;
         /* add this */
         flex-direction: column;
         /* add this */
     }
-
+    .slots{
+        align-items: center;
+    }
 
     /* advisee Content */
     .advisee-content {
@@ -319,6 +321,15 @@
     .circle-graph-percents-wrapper span {
         line-height: 1;
     }
+    .edit-slots-btn{
+        margin-bottom: 10px;
+        color: #212529 !important;
+    }
+
+    .edit-slots-btn:hover{
+        text-decoration: underline;
+    }
+
 </style>
 
 @section('content')
@@ -358,47 +369,55 @@
             <div class="row advisee">
                 <div class="col-md-3">
                     <div class="advisee-sidebar">
-                        <div class="advisee-head">
-                            <h5>Slots taken under your Advisory</h5>
-                        </div>
-
-                        <div class="circle-graph" data-circle-graph data-percent="{{ $studentsCount * 10 }}">
-                            <div class="circle-graph-progress">
-                                <div class="circle-graph-progress-fill"></div>
+                        <div class="slots">
+                            <div class="advisee-head">
+                                <h5>Slots taken under your Advisory</h5>
                             </div>
-                            <div class="circle-graph-percents">
-                                <div class="circle-graph-percents-wrapper">
-                                    <span class="circle-graph-percents-number">{{ $studentsCount }}</span>
-                                    <span class="circle-graph-percents-units">of 10</span>
+
+                            <div class="circle-graph" data-circle-graph data-percent="{{ $studentsCount * 10 }}">
+                                <div class="circle-graph-progress">
+                                    <div class="circle-graph-progress-fill"></div>
+                                </div>
+                                <div class="circle-graph-percents">
+                                    <div class="circle-graph-percents-wrapper">
+                                        <span class="circle-graph-percents-number">{{ $studentsCount }}</span>
+                                        <span class="circle-graph-percents-units">of 10</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        @push('scripts')
-                            <script>
-                                // Fetch students count and update the circle graph
-                                function fetchStudentsCount() {
-                                    $.ajax({
-                                        url: "{{ route('adviser.students.count', $adviser->id) }}",
-                                        method: 'GET',
-                                        success: function(response) {
-                                            var studentsCount = response.count;
-                                            var circleGraph = $('[data-circle-graph]');
-                                            var studentsCountElement = $('#studentsCount');
+                            @push('scripts')
+                                <script>
+                                    // Fetch students count and update the circle graph
+                                    function fetchStudentsCount() {
+                                        $.ajax({
+                                            url: "{{ route('adviser.students.count', $adviser->id) }}",
+                                            method: 'GET',
+                                            success: function(response) {
+                                                var studentsCount = response.count;
+                                                var circleGraph = $('[data-circle-graph]');
+                                                var studentsCountElement = $('#studentsCount');
 
-                                            studentsCountElement.text(studentsCount);
-                                            var percentage = (studentsCount / 10) * 100;
-                                            circleGraph.attr('data-percent', percentage);
-                                        }
+                                                studentsCountElement.text(studentsCount);
+                                                var percentage = (studentsCount / 10) * 100;
+                                                circleGraph.attr('data-percent', percentage);
+                                            }
+                                        });
+                                    }
+
+                                    // Fetch students count when the page loads
+                                    $(document).ready(function() {
+                                        fetchStudentsCount();
                                     });
-                                }
-
-                                // Fetch students count when the page loads
-                                $(document).ready(function() {
-                                    fetchStudentsCount();
-                                });
-                            </script>
-                        @endpush
+                                </script>
+                            @endpush
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-sm edit-slots-btn">
+                                <i class="far fa-edit"></i> Edit # of slots
+                            </button>
+                        </div>
                     </div>
+                    
                 </div>
 
                 <div class="col-md-9">

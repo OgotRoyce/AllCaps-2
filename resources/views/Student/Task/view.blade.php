@@ -232,7 +232,10 @@
                         @endif
                         <div class="task-usertitle-name">
                             <h5 class="task-head">
-                                My Work
+                                My Work  
+                                <span style="margin-left: 70px; margin-right:10px; color:#212529; font-size: 1.15rem; font-weight:200;">
+                                    <i class="far fa-check-circle" style="font-size:1rem; margin-right:2px;"></i>
+                                    Score: <b>100</b></span>
                             </h5>
                         </div>
 

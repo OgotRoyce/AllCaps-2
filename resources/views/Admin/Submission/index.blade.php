@@ -117,6 +117,7 @@
                                 {{-- <th>Task Name</th> --}}
                                 <th>Status</th>
                                 <th class="col-sm-4">Attachment</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -156,6 +157,9 @@
                                             target="_blank">{{ $item->attachments }}</a>
                                         {{-- IF THE FILE IS .PDF, magbubukas lang sa new window, pero pag .docx, madodownload --}}
                                     </td>
+                                    
+                                    {{-- <td contenteditable="true">{{ $item->score }}</td> --}}
+
                                 </tr>
                         </tbody>
                         @php
@@ -163,8 +167,10 @@
                         @endphp
                         @endforeach
                     </table>
+                    
 
                 </div>
+                
             </div>
         </div>
     </div>

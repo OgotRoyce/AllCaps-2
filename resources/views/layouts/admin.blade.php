@@ -152,6 +152,7 @@ date_default_timezone_set('Asia/Manila');
         border-radius: 4px;
         text-decoration: none;
         margin-top: 350px;
+        margin-bottom: 0px;
         box-shadow: none;
         transition: none;
     }

@@ -35,7 +35,7 @@
         background-position: center;
     }
     .form_container {
-        margin-top: 150px;
+        margin-top: 100px;
         width: 30%;
         /* width: fit-content; */
         height: fit-content;
@@ -178,10 +178,17 @@
         font-size: 1.15rem;
         color: #ff6600;
     }
-    .note {
-        font-size: 0.75rem;
-        color: #8B8E98;
-        text-decoration: underline;
+    .terms {
+        font-size: 12px;
+        color: #212121;
+        text-align: center;
+    }
+    .terms2 {
+        color: #212121;
+        text-decoration: underline !important;
+    }
+    .terms2:hover {
+    color: #ff6600;
     }
     .form-check{
        margin-right: 60%;
@@ -268,6 +275,10 @@
 
         <div class="separator">
             <hr class="line">
+        </div>
+
+        <p class="terms">By clicking the sign in button, you recognize the authority of Gordon College to process your personal and sensitive information, pursuant to the 
+            <a class="terms2" href="https://gordoncollegeccs.edu.ph/datapolicy/"> Gordon College General Privacy Notice</a> and applicable laws.</p>
 
     </form>
 
