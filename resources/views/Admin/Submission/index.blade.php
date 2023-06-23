@@ -76,6 +76,25 @@
         text-transform: uppercase;
     }
 
+    .submit-score-btn {
+    font-size: 12px;
+    width: 35px;
+    height: 35px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    padding: 0;
+}
+
+.score-input{
+    width: 70px !important;
+    height: 35px !important;
+}
+
+    .score-value{
+        font-weight: bold !important;
+    }
 
 
     thead {
@@ -165,10 +184,10 @@
                                             <form class="score-form"
                                                 action="{{ route('submitScore', ['act' => $item->id]) }}" method="POST">
                                                 @csrf
-                                                <input type="text" name="score" class="form-control score-input"
-                                                    placeholder="Enter score">
-                                                <button type="submit"
-                                                    class="btn btn-primary btn-sm submit-score-btn">Submit</button>
+                                                <div class="input-group">
+                                                    <input type="text" name="score" class="form-control score-input" placeholder="Enter score">
+                                                    <button type="submit" class="btn btn-danger btn-sm submit-score-btn"><i class="fas fa-check"></i></button>
+                                                </div>                                    
                                             </form>
                                         @endif
 
