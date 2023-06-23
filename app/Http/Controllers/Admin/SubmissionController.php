@@ -21,15 +21,39 @@ class SubmissionController extends Controller
         $acts = Output::where('activity_code', $id)
             ->with('Student')
             ->get();
-    
+
         $titles = $acts->pluck('title')->unique()->values()->toArray();
-    
+
         return view('Admin.Submission.index', ['acts' => $acts, 'titles' => $titles]);
     }
 
-    
-    
-    
+    public function submitScore(Request $request, Output $act)
+    {
+        $validatedData = $request->validate([
+            'score' => 'required|numeric',
+        ]);
+
+        $act->score = $validatedData['score'];
+        $act->score_submitted = true;
+        $act->save();
+
+        return redirect()->back()->with('success', 'Score created!');
+    }
+    public function editScore(Request $request, Output $act)
+    {
+        $validatedData = $request->validate([
+            'score' => 'required|numeric',
+        ]);
+
+        $act->score = $validatedData['score'];
+        $act->save();
+
+        return response()->json(['message' => 'Score updated successfully!']);
+    }
+
+
+
+
     // public function index($task_code)
     // {
     //     $acts = Output::where('output.task_code', $task_code)

@@ -21,11 +21,13 @@ class Output extends Model
         'due_date',
         'attachments',
         'status',
+        'score',
+        'score_submitted'
+
     ];
 
-        public function student()
-        {
-            return $this->belongsTo(Student::class,'account_code','student_id');
-        }
-
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'account_code', 'student_id');
+    }
 }

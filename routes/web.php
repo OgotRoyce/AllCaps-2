@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
     Route::group(['prefix' => 'submissions_admin'], function () {
         Route::get('/{id}', ['as' => 'submissions_admin', 'uses' => "SubmissionController@index"]);
+        Route::patch('/acts/{act}', 'SubmissionController@updateScore')->name('submissions_admin.updateScore');
+        Route::post('/acts/{act}/submit-score', 'SubmissionController@submitScore')->name('submitScore');
+        Route::patch('/acts/{act}/edit-score', 'SubmissionController@editScore')->name('editScore');
     });
 
     Route::group(['prefix' => 'students_admin'], function () {

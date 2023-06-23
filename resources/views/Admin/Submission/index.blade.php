@@ -93,7 +93,7 @@
                         <button type="button" class="btn back-btn btn-outline-danger">Back</button>
                     </a>
                     @foreach ($titles as $item)
-                    <h5 class="header-2 mt-2 ml-3"> {{ $item }}</h5>
+                        <h5 class="header-2 mt-2 ml-3"> {{ $item }}</h5>
                     @endforeach
                 </div>
             </div>
@@ -112,7 +112,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                 {{--   <th>Group Name</th> --}}
+                                {{--   <th>Group Name</th> --}}
                                 <th>Date submitted</th>
                                 {{-- <th>Task Name</th> --}}
                                 <th>Status</th>
@@ -125,11 +125,10 @@
                                 $counter = 1;
                             @endphp
                             @foreach ($acts as $item)
-                            
                                 <tr>
                                     <td>{{ $counter }}</td>
                                     <td>{{ $item->first_name }} {{ $item->last_name }}</td>
-                                       {{--  <td>{{ $item->group_name}}</td>  --}}
+                                    {{--  <td>{{ $item->group_name}}</td>  --}}
                                     <td>{{ $item->created_at }}</td>
                                     {{-- <td>{{ $item->task }}</td> --}}
 
@@ -157,9 +156,23 @@
                                             target="_blank">{{ $item->attachments }}</a>
                                         {{-- IF THE FILE IS .PDF, magbubukas lang sa new window, pero pag .docx, madodownload --}}
                                     </td>
-                                    
-                                    {{-- <td contenteditable="true">{{ $item->score }}</td> --}}
 
+                                    {{-- <td contenteditable="true">{{ $item->score }}</td> --}}
+                                    <td>
+                                        @if ($item->score_submitted)
+                                            <span class="score-value">{{ $item->score }}</span>
+                                        @else
+                                            <form class="score-form"
+                                                action="{{ route('submitScore', ['act' => $item->id]) }}" method="POST">
+                                                @csrf
+                                                <input type="text" name="score" class="form-control score-input"
+                                                    placeholder="Enter score">
+                                                <button type="submit"
+                                                    class="btn btn-primary btn-sm submit-score-btn">Submit</button>
+                                            </form>
+                                        @endif
+
+                                    </td>
                                 </tr>
                         </tbody>
                         @php
@@ -167,11 +180,84 @@
                         @endphp
                         @endforeach
                     </table>
-                    
+
+
+
+
 
                 </div>
-                
+
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.submit-score-btn').on('click', function(event) {
+                event.preventDefault();
+                var scoreForm = $(this).closest('.score-form');
+                var scoreInput = scoreForm.find('.score-input');
+                var score = scoreInput.val();
+                var actId = scoreForm.data('act-id');
+
+                // Make an AJAX request to submit the score
+                $.ajax({
+                    url: scoreForm.attr('action'),
+                    method: 'POST',
+                    data: {
+                        score: score
+                    },
+                    success: function(response) {
+                        console.log('Score submitted successfully!');
+                        scoreInput.prop('disabled', true);
+                        scoreForm.find('.submit-score-btn').prop('disabled', true).text(
+                            'Submitted');
+                        scoreForm.find('.edit-score-btn').show();
+                    },
+                    error: function(xhr) {
+                        console.log('Error submitting score:', xhr.responseText);
+                    }
+                });
+            });
+
+            $('.edit-score-btn').on('click', function() {
+                var scoreElement = $(this).siblings('.score-value');
+                var editScoreForm = $(this).siblings('.edit-score-form');
+
+                scoreElement.hide();
+                $(this).hide();
+                editScoreForm.show();
+                editScoreForm.find('.score-input').focus();
+            });
+
+            $('.edit-score-form').on('submit', function(event) {
+                event.preventDefault();
+                var editScoreForm = $(this);
+                var scoreInput = editScoreForm.find('.score-input');
+                var score = scoreInput.val();
+                var actId = editScoreForm.data('act-id');
+
+                // Make an AJAX request to update the score
+                $.ajax({
+                    url: editScoreForm.attr('action'),
+                    method: 'POST',
+                    data: {
+                        _method: 'PATCH',
+                        score: score
+                    },
+                    success: function(response) {
+                        console.log('Score updated successfully!');
+                        scoreInput.prop('disabled', true);
+                        editScoreForm.find('.submit-score-btn').prop('disabled', true).text(
+                            'Saved');
+                        editScoreForm.hide();
+                        editScoreForm.siblings('.score-value').text(score).show();
+                        editScoreForm.siblings('.edit-score-btn').show();
+                    },
+                    error: function(xhr) {
+                        console.log('Error updating score:', xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

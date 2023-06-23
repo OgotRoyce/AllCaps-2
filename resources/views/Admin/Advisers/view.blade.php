@@ -77,15 +77,15 @@
     }
 
     .advisee-card .email {
-      font-size: 14px;
-      color: #777;
-      margin-left: 84px;
+        font-size: 14px;
+        color: #777;
+        margin-left: 84px;
     }
 
     .advisee-card .group {
         font-size: 15px;
         font-weight: 500;
-        color:#25272a;
+        color: #25272a;
         margin-left: 84px;
         margin-right: 20px;
         margin-bottom: 8px;
@@ -180,7 +180,8 @@
         flex-direction: column;
         /* add this */
     }
-    .slots{
+
+    .slots {
         align-items: center;
     }
 
@@ -321,15 +322,15 @@
     .circle-graph-percents-wrapper span {
         line-height: 1;
     }
-    .edit-slots-btn{
+
+    .edit-slots-btn {
         margin-bottom: 10px;
         color: #212529 !important;
     }
 
-    .edit-slots-btn:hover{
+    .edit-slots-btn:hover {
         text-decoration: underline;
     }
-
 </style>
 
 @section('content')
@@ -381,32 +382,44 @@
                                 <div class="circle-graph-percents">
                                     <div class="circle-graph-percents-wrapper">
                                         <span class="circle-graph-percents-number">{{ $studentsCount }}</span>
-                                        <span class="circle-graph-percents-units">of 10</span>
+                                        <span class="circle-graph-percents-units">of <span
+                                                id="limitDisplay">10</span></span>
                                     </div>
+                                    <form id="editLimitForm" class="d-none">
+                                        <input type="number" id="limitInput" value="10">
+                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                    </form>
+
                                 </div>
                             </div>
                             @push('scripts')
                                 <script>
-                                    // Fetch students count and update the circle graph
-                                    function fetchStudentsCount() {
-                                        $.ajax({
-                                            url: "{{ route('adviser.students.count', $adviser->id) }}",
-                                            method: 'GET',
-                                            success: function(response) {
-                                                var studentsCount = response.count;
-                                                var circleGraph = $('[data-circle-graph]');
-                                                var studentsCountElement = $('#studentsCount');
+                                    $(document).ready(function() {
+                                        // Display the form for editing the limit when the "Edit # of slots" button is clicked
+                                        $('.edit-slots-btn').click(function() {
+                                            var limitDisplay = $('#limitDisplay');
+                                            var limitInput = $('#limitInput');
 
-                                                studentsCountElement.text(studentsCount);
-                                                var percentage = (studentsCount / 10) * 100;
-                                                circleGraph.attr('data-percent', percentage);
+                                            limitInput.val(parseInt(limitDisplay.text()));
+                                            limitDisplay.addClass('d-none');
+                                            $('#editLimitForm').removeClass('d-none');
+                                        });
+
+                                        // Submit the form to update the limit
+                                        $('#editLimitForm').submit(function(e) {
+                                            e.preventDefault();
+
+                                            var newLimit = parseInt($('#limitInput').val());
+
+                                            if (newLimit > 0) {
+                                                // Perform your update logic here
+                                                $('#limitDisplay').text(newLimit);
+                                                $('#limitDisplay').removeClass('d-none');
+                                                $('#editLimitForm').addClass('d-none');
+                                            } else {
+                                                alert('Please enter a valid limit.');
                                             }
                                         });
-                                    }
-
-                                    // Fetch students count when the page loads
-                                    $(document).ready(function() {
-                                        fetchStudentsCount();
                                     });
                                 </script>
                             @endpush
@@ -417,7 +430,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="col-md-9">
@@ -427,18 +440,19 @@
                             <div class="header-line"></div>
                             <div class="row cards-container">
                                 @foreach ($students as $item)
-                                <div class="col-md-6 col-lg-6 mb-4">
-                                    {{-- <a href="{{ route('view_advisee', $item->id) }}"> --}}
+                                    <div class="col-md-6 col-lg-6 mb-4">
+                                        {{-- <a href="{{ route('view_advisee', $item->id) }}"> --}}
                                         <div class="advisee-card">
                                             {{-- <img class="avatar" src="{{ asset('images/' . $item->photo) }}"
                                                 alt="Avatar" /> --}}
-                                                <img class="avatar" src="{{ asset('pictures/'.($item->photo ? $item->photo : 'pic.png')) }}"  />
+                                            <img class="avatar"
+                                                src="{{ asset('pictures/' . ($item->photo ? $item->photo : 'pic.png')) }}" />
                                             <div class="name">{{ $item->first_name }} {{ $item->last_name }}</div>
-                                            <div class="group">Group: <b>{{$item->group_name}}</b></div>  
+                                            <div class="group">Group: <b>{{ $item->group_name }}</b></div>
                                             <div class="email">{{ $item->email }}</div>
                                         </div>
-                                    
-                                </div>
+
+                                    </div>
                                 @endforeach
 
                             </div>
