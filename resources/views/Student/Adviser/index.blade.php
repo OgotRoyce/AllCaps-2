@@ -447,6 +447,22 @@
 
         <div class="user_select">
             @foreach ($advisers as $item)
+                    @if($item->counter == $item->slot)
+                    <div class="col-md-4 col-lg-3">
+                        <div class="user_item">   
+                            <a class="delete-button" onclick="event.preventDefault(); WarningConfirmation('{{ $item->id }}')">               
+                                <span class="checkmark"></span>
+                                <div class="info">
+                                    <img class="avatar" src="{{ asset('pictures/' . ($item->photo ? $item->photo : 'pic.png')) }}" />
+                                    <div class="name-role">
+                                        <p class="name">{{ $item->first_name }} {{ $item->last_name }}</p>
+                                        <p class="role">{{ $item->program }}</p>
+                                        <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/{{$item->slot}}</span></b></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @else
                 <div class="col-md-4 col-lg-3">
                     <div class="user_item">
                         <a class="delete-button" onclick="event.preventDefault(); DeleteTaskConfirmation('{{ $item->id }}')">
@@ -456,12 +472,14 @@
                                 <div class="name-role">
                                     <p class="name">{{ $item->first_name }} {{ $item->last_name }}</p>
                                     <p class="role">{{ $item->program }}</p>
-                                    <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/10</span></b></p>
+                                    <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/{{$item->slot}}</span></b></p>
                                 </div>
                             </div>
                         </a>
+       
                         <form id="delete-form-{{ $item->id }}" action="{{ route('choose_adviser', $item->id) }}" method="POST" class="d-none">
                             {!! csrf_field() !!}
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -480,6 +498,24 @@
                 
                 <div class="user_select">
                     @foreach ($advisers as $item)
+                    @if($item->counter == $item->slot)
+                    <div class="col-md-4 col-lg-3">
+                        <div class="user_item">
+                            <a class="delete-button" onclick="event.preventDefault(); WarningConfirmation('{{ $item->id }}')">
+                                <span class="checkmark"></span>
+                                <div class="info">
+                                    <img class="avatar" src="{{ asset('pictures/' . ($item->photo ? $item->photo : 'pic.png')) }}" />
+                                    <div class="name-role">
+                                        <p class="name">{{ $item->first_name }} {{ $item->last_name }}</p>
+                                        <p class="role">{{ $item->program }}</p>
+                                        <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/{{$item->slot}}</span></b></p>
+                                    </div>
+                                </div>
+                            </a>
+                           
+                        </div>
+                    </div>
+                    @else
                         <div class="col-md-4 col-lg-3">
                             <div class="user_item">
                                 <a class="delete-button" onclick="event.preventDefault(); DeleteTaskConfirmation('{{ $item->id }}')">
@@ -489,7 +525,7 @@
                                         <div class="name-role">
                                             <p class="name">{{ $item->first_name }} {{ $item->last_name }}</p>
                                             <p class="role">{{ $item->program }}</p>
-                                            <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/10</span></b></p>
+                                            <p class="count">Advisees: <b><span style="color: #f39100;">{{ $item->counter }}/{{$item->slot}}</span></b></p>
                                         </div>
                                     </div>
                                 </a>
@@ -498,11 +534,33 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
                     @endforeach
                 </div>
             @endif
             
  
+            <script>
+                function WarningConfirmation(taskId) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'error',
+                        title: 'Sorry',
+                        text: 'This project adviser has no vacancies',
+                        icon: 'error',
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'ok',
+                        timerProgressBar: true,
+                        timer: 1800,
+                    }).then((result) => {
+                       
+                    });
+                }
+            </script>
+
 
             <script>
                 function DeleteTaskConfirmation(taskId) {
@@ -529,6 +587,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var user_items = document.querySelectorAll(".user_item");
@@ -548,6 +608,8 @@
         });
     });
 </script>
+
+
 <script>
     $(document).ready(function() {
         var user_items = $(".user_item");

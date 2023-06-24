@@ -176,6 +176,13 @@
                             <span class="badge badge-secondary"><span style="font-weight: 300; color: #bfbfbf;">List of
                                     students</span>
                         </h5>
+
+                        {{-- <form action="{{ route('upload_student') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="file" name="file" accept=".csv, application/vnd.ms-excel" class="btn btn-outline-danger float-right">
+                            <button type="submit" class="btn btn-outline-danger float-right">Upload</button>
+                        </form> --}}
+
                             <a href="{{ route('create_student') }}">
                               <button type="button" style="width:100%" class="btn btn-outline-danger float-right">+ Add Student</button>
                             </a>

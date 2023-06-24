@@ -19,14 +19,14 @@ class AdvisoreeController extends Controller
     {
         $user = auth('adviser')->user();
         $userID = $user->id;
-
+        $slot =  $user->slot;
         $adviser = Adviser::where('id', $userID)->first();
         $students = Student::whereIn('adviser_id', [$adviser->id])
             ->where('status', 'accepted')
             ->get();
 
         // dd($adviser);
-        return view('Adviser.Advisoree.index', ['adviser' => $adviser, 'students' => $students]);
+        return view('Adviser.Advisoree.index', ['adviser' => $adviser, 'students' => $students, 'slot'=>$slot ]);
     }
 
 

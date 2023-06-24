@@ -18,6 +18,7 @@ class Adviser extends Authenticatable
         'program',
         'password',
         'photo',
-        'counter'
+        'counter',
+        'slot',
     ];
 }

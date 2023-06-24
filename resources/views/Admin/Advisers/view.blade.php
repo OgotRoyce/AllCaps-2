@@ -357,8 +357,10 @@
                     </div>
                     <div class="profile-usertitle">
                         <div>
-                            <h5 class="profile-usertitle-name">{{ $adviser->first_name }}
-                                {{ $adviser->last_name }}</h5>
+                     <u> <a href="{{route('edit_adviser', $adviser->id)}}">    <h5 class="profile-usertitle-name">{{ $adviser->first_name }}   {{ $adviser->last_name }}
+                                <i class="far fa-edit profile-usertitle-name"></i>
+                            </h5>
+                      </a> </u>
                         </div>
                         <div>
                             <h6 class="profile-usertitle-email"><strong>Email:</strong>
@@ -383,7 +385,7 @@
                                     <div class="circle-graph-percents-wrapper">
                                         <span class="circle-graph-percents-number">{{ $studentsCount }}</span>
                                         <span class="circle-graph-percents-units">of <span
-                                                id="limitDisplay">10</span></span>
+                                                id="limitDisplay">{{$slot}}</span></span>
                                     </div>
                                     <form id="editLimitForm" class="d-none">
                                         <input type="number" id="limitInput" value="10">
@@ -426,7 +428,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-sm edit-slots-btn">
-                                <i class="far fa-edit"></i> Edit # of slots
+                                {{-- <i class="far fa-edit"></i> Edit # of slots --}}
                             </button>
                         </div>
                     </div>

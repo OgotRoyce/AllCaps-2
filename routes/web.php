@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('/create', ['as' => 'create_student', 'uses' => "StudentController@create"]);
         Route::post('/create', ['as' => 'store_student', 'uses' => "StudentController@store"]);
         Route::get('/show/{id}', ['as' => 'view_student', 'uses' => "StudentController@show"]);
+        Route::post('/bulkupload', ['as' => 'upload_student', 'uses' => "StudentController@bulkupload"]);
     });
 
     Route::group(['prefix' => 'adviser_admin'], function () {

@@ -101,6 +101,25 @@ class StudentController extends Controller
         return redirect()->route('member')->with('success', 'Student updated!');
     }
 
+    public function bulkupload(Request $request)
+    {
+         // Validate the uploaded file
+         $request->validate([
+            'file' => 'required|mimes:csv,txt|max:2048', // Example validation rules
+        ]);
+
+        // Process the uploaded file
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+
+            // Perform necessary operations on the file
+            // Extract data, perform validations, store in the database, etc.
+        }
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'File uploaded successfully.');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

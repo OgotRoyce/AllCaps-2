@@ -74,6 +74,11 @@
                     </div>
                   </div>
 
+                  <div class="">
+                    <label for="formFile" class="form-label">Slot</label>
+                    <input type="number" name="slot"  class="form-control" value="{{ old('slot') }}" id="exampleFormControlInput1">
+                </div>
+
                     <!-- ito yung picture upload function, place holder lang muna  -->
                 <div class="">
                     <label for="formFile" class="form-label">Select Profile Photo:</label>

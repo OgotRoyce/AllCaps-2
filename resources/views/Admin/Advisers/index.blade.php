@@ -162,7 +162,7 @@
                     <div class="adv-role">{{ $item->program }}</div>
                     <div class="email">{{ $item->email }}</div>
 
-
+                    <div class="email">Slot: {{ $item->slot }}</div>
                     <div class="right-content">  
 
                         {{-- <i class="accordion-img fas fa-pencil-alt" style="color: rgb(48, 133, 214)" data-bs-target="#exampleModalToggle-{{$item->id}}" data-bs-toggle="modal"></i> --}}

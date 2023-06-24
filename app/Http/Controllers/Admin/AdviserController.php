@@ -52,6 +52,7 @@ class AdviserController extends Controller
                 'program' => $request->get('program'),
                 'password' => bcrypt($request->get('password')),
                 'photo' => $image,
+                'slot' =>  $request->get('slot'),
 
             ]);
         } else {
@@ -75,14 +76,16 @@ class AdviserController extends Controller
     public function show(string $id)
     {
         $adviser = Adviser::find($id);
+        $slot =  $adviser->slot;
         $studentsCount = Student::where('adviser_id', $adviser->id)->count();
 
         $students = Student::where('adviser_id', $adviser->id)->get();
-
+        
         return view('Admin.Advisers.view', [
             'adviser' => $adviser,
             'studentsCount' => $studentsCount,
-            'students' => $students
+            'students' => $students,
+            'slot' => $slot, 
         ]);
 
 
@@ -120,6 +123,7 @@ class AdviserController extends Controller
     {
         $user = Adviser::find($id);
         $input = $request->all();
+        // dd($input);
         $user->update($input);
         return redirect()->route('adviser')->with('success', 'Adviser updated!');
     }

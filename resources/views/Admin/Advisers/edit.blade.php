@@ -43,6 +43,11 @@
                     </select>
                 </div>
 
+                <div class="">
+                    <label for="formFile" class="form-label">Slot</label>
+                    <input type="number" name="slot" step="any" class="form-control" value="{{ $user->slot }}" >
+                </div>
+
                 {{-- <div class="">
                     <label for="formFile" class="form-label">Password</label>
                     <input type="password" name="password" step="any" class="form-control" >

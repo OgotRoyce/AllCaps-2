@@ -334,7 +334,7 @@
                             
                        
                               <span class="circle-graph-percents-number">{{$adviser->counter}}</span>
-                              <span class="circle-graph-percents-units">of 10</span>
+                              <span class="circle-graph-percents-units">of {{$slot}}</span>
                
                             </div>
                           </div>
