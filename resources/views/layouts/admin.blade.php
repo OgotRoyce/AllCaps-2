@@ -46,7 +46,7 @@ date_default_timezone_set('Asia/Manila');
 </head>
 <style>
 
-    .body {
+    .nav-item {
         font-family: 'Poppins', sans-serif !important;
     }
     .header {
@@ -164,8 +164,12 @@ date_default_timezone_set('Asia/Manila');
     }
 
     .scrollbar {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Poppins', sans-serif !important;
         font-size: 18px;
+    }
+
+    .navbar-menu .navbar-nav .nav-link {
+        font-family: 'Poppins', sans-serif !important;
     }
 </style>
 

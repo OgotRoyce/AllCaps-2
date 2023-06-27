@@ -159,6 +159,10 @@ date_default_timezone_set('Asia/Manila');
         font-family: 'Poppins', sans-serif;
         font-size: 18px;
     }
+
+    .navbar-menu .navbar-nav .nav-link {
+        font-family: 'Poppins', sans-serif !important;
+    }
 </style>
 
 <body>
