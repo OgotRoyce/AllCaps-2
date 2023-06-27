@@ -45,6 +45,10 @@ date_default_timezone_set('Asia/Manila');
 
 </head>
 <style>
+
+    .body {
+        font-family: 'Poppins', sans-serif !important;
+    }
     .header {
         display: flex;
         align-items: center;
