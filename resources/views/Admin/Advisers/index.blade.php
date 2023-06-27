@@ -94,6 +94,15 @@
   padding: 10px;
 }
 
+.profile-card .adv-slot {
+  font-size: 16px;
+  color: #3f3f3f;
+  margin-left: 84px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  font-weight: 900;
+}
+
 .right-content {
     position: absolute;
     top: 0;
@@ -162,7 +171,7 @@
                     <div class="adv-role">{{ $item->program }}</div>
                     <div class="email">{{ $item->email }}</div>
 
-                    <div class="email">Slot: {{ $item->slot }}</div>
+                    <div class="adv-slot">Slot: <span style="color: tomato;">{{ $item->slot }}</span></div>
                     <div class="right-content">  
 
                         {{-- <i class="accordion-img fas fa-pencil-alt" style="color: rgb(48, 133, 214)" data-bs-target="#exampleModalToggle-{{$item->id}}" data-bs-toggle="modal"></i> --}}

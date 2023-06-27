@@ -331,13 +331,23 @@
     .edit-slots-btn:hover {
         text-decoration: underline;
     }
+
+    .right-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 30px;
+}
+    .right-content:hover{
+        color:#f06548 !important;
+    }
 </style>
 
 @section('content')
     <div class="container-fluid">
         <div class="modal-header row align-items-center">
             <div class="col">
-                <a href="{{ route('adviser') }}">
+                <a href="{{ route('adviser') }}"> 
                     <button type="button" class="btn back-btn btn-outline-danger">Back</button>
                 </a>
                 <div class="d-flex justify-content-between align-items-center">
@@ -357,10 +367,12 @@
                     </div>
                     <div class="profile-usertitle">
                         <div>
-                     <u> <a href="{{route('edit_adviser', $adviser->id)}}">    <h5 class="profile-usertitle-name">{{ $adviser->first_name }}   {{ $adviser->last_name }}
-                                <i class="far fa-edit profile-usertitle-name"></i>
-                            </h5>
-                      </a> </u>
+                        <h5 class="profile-usertitle-name">{{ $adviser->first_name }}   {{ $adviser->last_name }}</h5>
+                        </div>
+                        <div class="right-content">
+                        <a href="{{route('edit_adviser', $adviser->id)}}"> 
+                                <i class="adv-edit fas fa-edit" style="color: #8a8a8a; font-size: 30px;"></i>
+                            </a>
                         </div>
                         <div>
                             <h6 class="profile-usertitle-email"><strong>Email:</strong>
