@@ -11,6 +11,8 @@ use App\Http\Requests\StudentRequest;
 use Illuminate\Support\Facades\Hash;
 use Nette\Utils\Random;
 use Illuminate\Support\Str;
+use App\Imports\StudentImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -103,8 +105,8 @@ class StudentController extends Controller
 
     public function bulkupload(Request $request)
     {
-         // Validate the uploaded file
-         $request->validate([
+        // Validate the uploaded file
+        $request->validate([
             'file' => 'required|mimes:csv,txt|max:2048', // Example validation rules
         ]);
 
@@ -127,5 +129,15 @@ class StudentController extends Controller
     {
         Student::destroy($id);
         return back()->with('success', 'Deleted successfully.');
+    }
+
+    public function importStudents(Request $request)
+    {
+        $file = $request->file('file');
+        $validatedData = $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+        Excel::import(new StudentImport, $file);
+        return redirect()->back()->with('success', 'Students imported successfully.');
     }
 }

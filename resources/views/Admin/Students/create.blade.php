@@ -7,7 +7,8 @@
             <button type="button" class="btn btn-outline-danger">Back</button>
         </a>
     </div>
-    <form action="" method="post" enctype="multipart/form-data" class="row g-3">
+
+    <form action="{{ route('students.import') }}" method="post" enctype="multipart/form-data" class="row g-3">
         {!! csrf_field() !!}
 
         @if ($errors->any())
@@ -19,7 +20,30 @@
                 </ul>
             </div>
         @endif
+
         <div class="">
+            <label for="formFile" class="form-label">Upload Students</label>
+            <input type="file" name="file" accept=".xls, .xlsx" step=any class="form-control">
+        </div>
+
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            <button type="submit" class="btn btn-danger w-100">Create</button>
+        </div>
+    </form>
+
+    <script>
+        const showPasswordToggle = document.getElementById('show-password-toggle');
+        const passwordField = document.getElementsByName('password')[0];
+
+        showPasswordToggle.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.textContent = type === 'password' ? 'Show Password' : 'Hide Password';
+        });
+    </script>
+@endsection
+{{-- <div class="">
             <label for="exampleFormControlInput1" class="form-label">First Name</label>
             <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1"
                 value="{{ old('first_name') }}">
@@ -39,25 +63,4 @@
               <input type="password" name="password"  class="form-control" id="exampleFormControlInput1">
               <button type="button" class="btn btn-outline-danger" id="show-password-toggle">Show Password</button>
             </div>
-          </div>
-        <div class="">
-            <label for="formFile" class="form-label">Profile Photo</label>
-            <input type="file" name="photo" step="any" class="form-control">
-        </div>
-
-        <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-            <button type="submit" class="btn btn-danger w-100">Create</button>
-        </div>
-    </form>
-    <script>
-        const showPasswordToggle = document.getElementById('show-password-toggle');
-        const passwordField = document.getElementsByName('password')[0];
-        
-        showPasswordToggle.addEventListener('click', function () {
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-            this.textContent = type === 'password' ? 'Show Password' : 'Hide Password';
-        });
-    </script>
-@endsection
+          </div> --}}
