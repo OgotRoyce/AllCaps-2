@@ -1,5 +1,18 @@
 @extends('layouts.admin')
 
+<style>
+ .form-label{
+    font-family: 'Poppins', sans-serif;
+        font-size: 32px;
+        color: #525252;
+        display: flex;
+        /* add this to enable flexbox */
+        align-items: center;
+        /* add this to center items vertically */
+        margin-bottom: 20px;
+ }
+</style>
+
 @section('content')
 
     <div class="modal-header">
@@ -22,13 +35,13 @@
         @endif
 
         <div class="">
-            <label for="formFile" class="form-label">Upload Students</label>
+            <label for="formFile" class="form-label"><i class="fas fa-file-upload" style="margin-left: 20px; margin-right: 20px;"></i>Upload Students</label>
             <input type="file" name="file" accept=".xls, .xlsx" step=any class="form-control">
         </div>
 
         <div class="modal-footer">
             <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-            <button type="submit" class="btn btn-danger w-100">Create</button>
+            <button type="submit" class="btn btn-danger w-100">Upload</button>
         </div>
     </form>
 

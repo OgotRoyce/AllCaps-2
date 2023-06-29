@@ -203,8 +203,14 @@
                     <div class="col-md-3">
                         <div class="profile-sidebar">
                             <div class="profile-userpic">
-                                {{-- <img src="{{ asset('images/dp.png') }}" class="img-responsive" alt=""> --}}
-                                <img class="img-responsive" src="{{ asset('pictures/'.( auth('student')->user()->photo ? auth('student')->user()->photo : 'pic.png')) }}"  />
+                                {{-- <img class="avatar2" src="{{ asset('images/dp.png') }}" alt="Avatar"> --}}
+                                {{-- <img class="avatar" src="{{ asset('pictures/'.( auth('student')->user()->photo ? auth('student')->user()->photo : 'pic.png')) }}"  /> --}}
+                                @if(auth('student')->user()->photo)
+                                    <img class="avatar" src="{{ asset('pictures/'.auth('student')->user()->photo) }}" />
+                                @else
+                                    <img class="avatar2" src="{{ asset('images/dp.png') }}" alt="Avatar">
+                                @endif
+
                             </div>
                             <div class="profile-usertitle">
                                 <div class="profile-usertitle-name">

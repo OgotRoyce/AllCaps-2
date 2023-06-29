@@ -119,7 +119,17 @@
         object-fit: cover;
     }
 
+    .avatar2 {
+        transition: .3s ease;
+        width: 72px;
+        object-fit: cover;
+    }
+
     .avatar:hover {
+        transform: scale(1.2) rotate(22deg);
+    }
+
+    .avatar2:hover {
         transform: scale(1.2) rotate(22deg);
     }
 
@@ -160,6 +170,12 @@
     }
 
     .profile-card .avatar {
+        border-radius: 999px;
+        width: 72px;
+        padding: 10px;
+    }
+
+    .profile-card .avatar2 {
         border-radius: 999px;
         width: 72px;
         padding: 10px;
@@ -209,9 +225,11 @@
         <div class="col-md-4 col-lg-3">
             <a href="{{ route('view_student', $item->id) }}">
             <div class="profile-card">
-                {{-- <img class="avatar" src="{{ asset('images/pic.png') }}" alt="Avatar" /> --}}
-                <img class="avatar" src="{{ asset('pictures/'.($item->photo ? $item->photo : 'pic.png')) }}"  />
-
+                @if($item->photo)
+                    <img class="avatar" src="{{ asset('pictures/'.$item->photo) }}" alt="Avatar" />
+                @else
+                    <img class="avatar2" src="{{ asset('/images/dp.png') }}" alt="Avatar" />
+                @endif
                 <div class="name">{{ $item->last_name }}, {{ $item->first_name }}</div>
                 <div class="group"><b>Group:</b> {{ $item->group_name }}</div>
                 <div class="email">{{ $item->email }}</div>

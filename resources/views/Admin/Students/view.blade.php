@@ -238,6 +238,12 @@
         color: #999;
         margin-top: 10 px;
     }
+
+    .no-group {
+    /* color: #f06548; Set the desired color */
+    font-style: italic; /* Apply italic style */
+    }
+
 </style>
 
 @section('content')
@@ -269,8 +275,12 @@
                         <div class="profile-sidebar">
                             <div class="profile-userpic">
                                 {{-- <img src="{{ asset('/images/no_image.jpg') }}"  /> --}}
-                                <img class="avatar"
-                                    src="{{ asset('pictures/' . ($student->photo ? $student->photo : 'pic.png')) }}" />
+                                {{-- <img class="avatar" src="{{ asset('pictures/' . ($student->photo ? $student->photo : 'pic.png')) }}" /> --}}
+                            @if($student->photo)
+                                <img class="avatar" src="{{ asset('pictures/'.$student->photo) }}" alt="Avatar" />
+                            @else
+                                <img class="avatar2" src="{{ asset('/images/dp.png') }}" alt="Avatar" />
+                            @endif
 
                             </div>
                             <div class="profile-usertitle">
@@ -279,7 +289,12 @@
                                 </div>
                                 <div class="profile-usertitle-group">
                                     <h6 class="member-group">
+                                        {{-- <b>Group: {{ $student->group_name }}</b> --}}
+                                        @if($student->group_name)
                                         <b>Group: {{ $student->group_name }}</b>
+                                        @else
+                                            <b class="no-group">No group yet</b>
+                                        @endif
                                     </h6>
                                 </div>
                                 <div class="profile-usertitle-email">
