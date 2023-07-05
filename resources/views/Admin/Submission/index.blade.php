@@ -77,22 +77,22 @@
     }
 
     .submit-score-btn {
-    font-size: 12px;
-    width: 35px;
-    height: 35px;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-wrap: wrap !important;
-    padding: 0;
-}
+        font-size: 12px;
+        width: 35px;
+        height: 35px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        padding: 0;
+    }
 
-.score-input{
-    width: 70px !important;
-    height: 35px !important;
-}
+    .score-input {
+        width: 70px !important;
+        height: 35px !important;
+    }
 
-    .score-value{
+    .score-value {
         font-weight: bold !important;
     }
 
@@ -185,9 +185,11 @@
                                                 action="{{ route('submitScore', ['act' => $item->id]) }}" method="POST">
                                                 @csrf
                                                 <div class="input-group">
-                                                    <input type="text" name="score" class="form-control score-input" placeholder="Enter score">
-                                                    <button type="submit" class="btn btn-danger btn-sm submit-score-btn"><i class="fas fa-check"></i></button>
-                                                </div>                                    
+                                                    <input type="text" name="score" oninput="validateInput(this)"
+                                                        class="form-control score-input" placeholder="Enter score" required>
+                                                    <button type="submit" class="btn btn-danger btn-sm submit-score-btn"><i
+                                                            class="fas fa-check"></i></button>
+                                                </div>
                                             </form>
                                         @endif
 
@@ -209,6 +211,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function validateInput(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+    </script>
     <script>
         $(document).ready(function() {
             $('.submit-score-btn').on('click', function(event) {
